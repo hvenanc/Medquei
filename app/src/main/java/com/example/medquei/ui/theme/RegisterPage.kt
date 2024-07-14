@@ -1,7 +1,6 @@
 package com.example.medquei.ui.theme
 
 import android.app.Activity
-import android.content.Intent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -23,17 +22,19 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.medquei.R
-import com.example.medquei.RegisterActivity
 
 @Preview(showBackground = true)
 @Composable
-fun LoginPage() {
+fun RegisterPage() {
 
+    var name by rememberSaveable { mutableStateOf("") }
     var email by rememberSaveable { mutableStateOf("") }
     var password by rememberSaveable { mutableStateOf("") }
+    var confirmPassword by rememberSaveable { mutableStateOf("") }
     val activity = LocalContext.current as? Activity
 
     Column(
@@ -52,17 +53,33 @@ fun LoginPage() {
         )
         Spacer(modifier = Modifier.padding(24.dp))
         OutlinedTextField(
+            value = name,
+            label = {Text(text = "Digite seu Nome")},
+            modifier = Modifier.fillMaxWidth(),
+            onValueChange = {name = it}
+        )
+        Spacer(modifier = Modifier.padding(12.dp))
+        OutlinedTextField(
             value = email,
             label = { Text(text = "Digite seu E-mail") },
             modifier = Modifier.fillMaxWidth(),
-            onValueChange = { email = it }
+            onValueChange = {email = it},
         )
         Spacer(modifier = Modifier.padding(12.dp))
         OutlinedTextField(
             value = password,
-            label = { Text(text = "Digite a Senha") },
+            label = { Text(text = "Digite sua Senha")},
             modifier = Modifier.fillMaxWidth(),
-            onValueChange = { password = it }
+            onValueChange = {password = it},
+            visualTransformation = PasswordVisualTransformation(),
+        )
+        Spacer(modifier = Modifier.padding(12.dp))
+        OutlinedTextField(
+            value = confirmPassword,
+            label = { Text(text = "Repita a sua Senha")},
+            modifier = Modifier.fillMaxWidth(),
+            onValueChange = {confirmPassword = it},
+            visualTransformation = PasswordVisualTransformation(),
         )
         Spacer(modifier = Modifier.padding(12.dp))
         ElevatedButton(
@@ -70,32 +87,13 @@ fun LoginPage() {
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color(0xFF125451),
             ),
-            onClick = { /*TODO*/ }
+            onClick = { /*TODO*/ },
+            enabled = confirmPassword == password,
         ) {
             Text(
-                text = "Entrar",
+                text = "Cadastrar",
                 color = Color(0xFFE9F6FE),
             )
         }
-        Spacer(modifier = Modifier.padding(12.dp))
-        ElevatedButton(
-            modifier = Modifier.fillMaxWidth(),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = Color(0xFFE9F6FE),
-            ),
-            onClick = {
-                activity?.startActivity(
-                    Intent(activity, RegisterActivity::class.java).setFlags(
-                        Intent.FLAG_ACTIVITY_SINGLE_TOP
-                    )
-                )
-            }
-        ) {
-            Text(
-                text = "Crie sua Conta",
-                color = Color(0xFF125451)
-            )
-        }
     }
-
 }

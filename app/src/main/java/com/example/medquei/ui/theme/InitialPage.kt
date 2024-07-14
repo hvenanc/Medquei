@@ -6,13 +6,12 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -28,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.medquei.LoginActivity
 import com.example.medquei.R
+import com.example.medquei.RegisterActivity
 
 @Preview(showBackground = true)
 @Composable
@@ -58,7 +58,7 @@ fun InitialPage(modifier: Modifier = Modifier) {
             fontWeight = FontWeight.Bold,
         )
         Spacer(modifier = Modifier.size(48.dp))
-        Button(
+        ElevatedButton(
             modifier = Modifier.fillMaxWidth(),
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color(0xFF125451),
@@ -77,12 +77,18 @@ fun InitialPage(modifier: Modifier = Modifier) {
             )
         }
         Spacer(modifier = Modifier.size(12.dp))
-        Button(
+        ElevatedButton(
             modifier = Modifier.fillMaxWidth(),
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color(0xFFE9F6FE)
             ),
-            onClick = { /*TODO*/ }
+            onClick = {
+                activity?.startActivity(
+                    Intent(activity, RegisterActivity::class.java).setFlags(
+                        Intent.FLAG_ACTIVITY_SINGLE_TOP
+                    )
+                )
+            }
         ) {
             Text(
                 text = "Criar Conta",
