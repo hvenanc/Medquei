@@ -1,93 +1,94 @@
 package com.example.medquei.ui.theme
 
 import android.app.Activity
-import android.content.Intent
+import android.widget.Space
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.example.medquei.LoginActivity
 import com.example.medquei.R
 
 @Preview(showBackground = true)
 @Composable
-fun InitialPage(modifier: Modifier = Modifier) {
+fun LoginPage() {
 
+    var email by rememberSaveable { mutableStateOf("") }
+    var password by rememberSaveable { mutableStateOf("") }
     val activity = LocalContext.current as? Activity
 
     Column(
+        modifier = Modifier.padding(16.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.padding(16.dp),
     ) {
+
         Image(
             painter = painterResource(id = R.drawable.medquei_logo),
             contentDescription = "Logo Medquei",
             modifier = Modifier
                 .padding(16.dp)
-                .fillMaxWidth()
-                .height(300.dp),
+                .fillMaxWidth(),
             contentScale = ContentScale.Fit,
         )
-        Spacer(modifier = Modifier.size(48.dp))
-        Text(
-            text = "Mantenha o controle de seus medicamentos!\n" +
-                    "Crie lembretes para tomar seus medicamentos e reabastecer prescrições médicas. Acompanhe o histórico de uso de medicações e receba notificações para consultas médicas.",
-            fontSize = 14.sp,
-            textAlign = TextAlign.Center,
-            fontWeight = FontWeight.Bold,
+        Spacer(modifier = Modifier.padding(24.dp))
+        OutlinedTextField(
+            value = email,
+            label = { Text(text = "Digite seu E-mail") },
+            modifier = Modifier.fillMaxWidth(),
+            onValueChange = { email = it }
         )
-        Spacer(modifier = Modifier.size(48.dp))
+        Spacer(modifier = Modifier.padding(12.dp))
+        OutlinedTextField(
+            value = password,
+            label = { Text(text = "Digite a Senha") },
+            modifier = Modifier.fillMaxWidth(),
+            onValueChange = { password = it }
+        )
+        Spacer(modifier = Modifier.padding(12.dp))
         Button(
             modifier = Modifier.fillMaxWidth(),
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color(0xFF125451),
             ),
-            onClick = {
-                activity?.startActivity(
-                    Intent(activity, LoginActivity::class.java).setFlags(
-                        Intent.FLAG_ACTIVITY_SINGLE_TOP
-                    )
-                )
-            }
+            onClick = { /*TODO*/ }
         ) {
             Text(
-                text = "Login",
+                text = "Entrar",
                 color = Color(0xFFE9F6FE),
             )
         }
-        Spacer(modifier = Modifier.size(12.dp))
+        Spacer(modifier = Modifier.padding(12.dp))
         Button(
             modifier = Modifier.fillMaxWidth(),
             colors = ButtonDefaults.buttonColors(
-                containerColor = Color(0xFFE9F6FE)
+                containerColor = Color(0xFFE9F6FE),
             ),
             onClick = { /*TODO*/ }
         ) {
             Text(
-                text = "Criar Conta",
-                color = Color(0xFF125451),
+                text = "Crie sua Conta",
+                color = Color(0xFF125451)
             )
         }
     }
+
 }
