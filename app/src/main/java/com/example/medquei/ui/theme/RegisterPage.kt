@@ -6,7 +6,9 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.OutlinedTextField
@@ -25,6 +27,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.medquei.R
 
 @Preview(showBackground = true)
@@ -83,16 +86,18 @@ fun RegisterPage() {
         )
         Spacer(modifier = Modifier.padding(12.dp))
         ElevatedButton(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth().height(50.dp),
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color(0xFF125451),
             ),
+            shape = RoundedCornerShape(10.dp),
             onClick = { /*TODO*/ },
             enabled = confirmPassword == password,
         ) {
             Text(
                 text = "Cadastrar",
                 color = Color(0xFFE9F6FE),
+                fontSize = 16.sp,
             )
         }
     }

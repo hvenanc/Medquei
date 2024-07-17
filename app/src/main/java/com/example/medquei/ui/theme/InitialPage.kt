@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.Text
@@ -59,10 +61,11 @@ fun InitialPage(modifier: Modifier = Modifier) {
         )
         Spacer(modifier = Modifier.size(48.dp))
         ElevatedButton(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth().height(50.dp),
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color(0xFF125451),
             ),
+            shape = RoundedCornerShape(10.dp),
             onClick = {
                 activity?.startActivity(
                     Intent(activity, LoginActivity::class.java).setFlags(
@@ -74,14 +77,17 @@ fun InitialPage(modifier: Modifier = Modifier) {
             Text(
                 text = "Login",
                 color = Color(0xFFE9F6FE),
+                fontSize = 16.sp,
             )
         }
         Spacer(modifier = Modifier.size(12.dp))
         ElevatedButton(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth().height(50.dp),
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color(0xFFE9F6FE)
+
             ),
+            shape = RoundedCornerShape(10.dp),
             onClick = {
                 activity?.startActivity(
                     Intent(activity, RegisterActivity::class.java).setFlags(
@@ -93,6 +99,7 @@ fun InitialPage(modifier: Modifier = Modifier) {
             Text(
                 text = "Criar Conta",
                 color = Color(0xFF125451),
+                fontSize = 16.sp,
             )
         }
     }

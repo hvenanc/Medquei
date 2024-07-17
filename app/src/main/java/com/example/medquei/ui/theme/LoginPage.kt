@@ -7,7 +7,9 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.OutlinedTextField
@@ -25,6 +27,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.medquei.R
 import com.example.medquei.RegisterActivity
 
@@ -66,23 +69,32 @@ fun LoginPage() {
         )
         Spacer(modifier = Modifier.padding(12.dp))
         ElevatedButton(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(50.dp),
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color(0xFF125451),
             ),
+            shape = RoundedCornerShape(10.dp),
             onClick = { /*TODO*/ }
         ) {
             Text(
                 text = "Entrar",
                 color = Color(0xFFE9F6FE),
+                fontSize = 16.sp,
             )
         }
         Spacer(modifier = Modifier.padding(12.dp))
+        Text(text = "Não tem uma conta?")
+        Spacer(modifier = Modifier.padding(12.dp))
         ElevatedButton(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(50.dp),
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color(0xFFE9F6FE),
             ),
+            shape = RoundedCornerShape(10.dp),
             onClick = {
                 activity?.startActivity(
                     Intent(activity, RegisterActivity::class.java).setFlags(
@@ -93,7 +105,8 @@ fun LoginPage() {
         ) {
             Text(
                 text = "Crie sua Conta",
-                color = Color(0xFF125451)
+                color = Color(0xFF125451),
+                fontSize = 16.sp
             )
         }
     }
