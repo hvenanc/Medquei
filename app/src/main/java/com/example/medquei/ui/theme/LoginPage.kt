@@ -28,6 +28,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.medquei.HomeActivity
 import com.example.medquei.R
 import com.example.medquei.RegisterActivity
 
@@ -76,7 +77,13 @@ fun LoginPage() {
                 containerColor = Color(0xFF125451),
             ),
             shape = RoundedCornerShape(10.dp),
-            onClick = { /*TODO*/ }
+            onClick = {
+                activity?.startActivity(
+                    Intent(activity, HomeActivity::class.java).setFlags(
+                        Intent.FLAG_ACTIVITY_SINGLE_TOP
+                    )
+                )
+            }
         ) {
             Text(
                 text = "Entrar",
