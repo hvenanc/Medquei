@@ -13,7 +13,7 @@
         android:theme="@style/Theme.MedqueiAPP"
         tools:targetApi="31">
         <activity
-            android:name=".HomeActivity"
+            android:name=".LoginActivity"
             android:exported="false"
             android:label="@string/title_activity_home"
             android:theme="@style/Theme.MedqueiAPP" />
@@ -23,7 +23,7 @@
             android:label="@string/title_activity_register"
             android:theme="@style/Theme.MedqueiAPP" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".HomeActivity"
             android:exported="false"
             android:label="@string/title_activity_login"
             android:theme="@style/Theme.MedqueiAPP" />
