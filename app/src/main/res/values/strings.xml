@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Medquei APP</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_register">RegisterActivity</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_activity_main2">MainActivity2</string>
+    <string name="title_activity_medications">MedicationsActivity</string>
+</resources>
