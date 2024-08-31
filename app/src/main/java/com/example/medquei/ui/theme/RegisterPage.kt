@@ -1,6 +1,7 @@
 package com.example.medquei.ui.theme
 
 import android.app.Activity
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -29,6 +30,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.medquei.R
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
 
 @Preview(showBackground = true)
 @Composable
@@ -91,7 +94,20 @@ fun RegisterPage() {
                 containerColor = Color(0xFF125451),
             ),
             shape = RoundedCornerShape(10.dp),
-            onClick = { /*TODO*/ },
+            onClick = {
+                      Firebase.auth.createUserWithEmailAndPassword(email, password)
+                          .addOnCompleteListener(activity!!) {task ->
+                              if(task.isSuccessful) {
+                                  Toast.makeText(activity,
+                                      "Conta Criada!", Toast.LENGTH_LONG).show()
+                                  activity.finish()
+                              }
+                              else {
+                                  Toast.makeText(activity,
+                                      "Falha ao Criar Conta!", Toast.LENGTH_LONG).show()
+                              }
+                          }
+            },
             enabled = confirmPassword == password,
         ) {
             Text(

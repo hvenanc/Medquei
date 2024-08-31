@@ -27,6 +27,8 @@ import androidx.navigation.compose.rememberNavController
 import com.example.medquei.ui.nav.BottomNavBar
 import com.example.medquei.ui.nav.MainNavHost
 import com.example.medquei.ui.theme.MedqueiAPPTheme
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
 
 class HomeActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
@@ -72,6 +74,8 @@ class HomeActivity : ComponentActivity() {
                                     IconButton(
                                         onClick = {
                                             val intent = Intent(context, MainActivity::class.java)
+                                            Firebase.auth.signOut()
+                                            finish()
                                             context.startActivity(intent)
                                             (context as? Activity)?.finish()
                                         }

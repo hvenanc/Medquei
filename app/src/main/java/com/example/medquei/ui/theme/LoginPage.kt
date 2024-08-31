@@ -2,6 +2,7 @@ package com.example.medquei.ui.theme
 
 import android.app.Activity
 import android.content.Intent
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -25,12 +26,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.medquei.HomeActivity
 import com.example.medquei.R
 import com.example.medquei.RegisterActivity
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
 
 @Preview(showBackground = true)
 @Composable
@@ -66,7 +70,8 @@ fun LoginPage() {
             value = password,
             label = { Text(text = "Digite a Senha") },
             modifier = Modifier.fillMaxWidth(),
-            onValueChange = { password = it }
+            onValueChange = { password = it },
+            visualTransformation = PasswordVisualTransformation()
         )
         Spacer(modifier = Modifier.padding(12.dp))
         ElevatedButton(
@@ -78,11 +83,20 @@ fun LoginPage() {
             ),
             shape = RoundedCornerShape(10.dp),
             onClick = {
-                activity?.startActivity(
-                    Intent(activity, HomeActivity::class.java).setFlags(
-                        Intent.FLAG_ACTIVITY_SINGLE_TOP
-                    )
-                )
+                Firebase.auth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(activity!!) {task ->
+                        if(task.isSuccessful) {
+                            activity.startActivity(
+                                Intent(activity, HomeActivity::class.java).setFlags(
+                                    Intent.FLAG_ACTIVITY_SINGLE_TOP
+                                )
+                            )
+                        }
+                        else {
+                                Toast.makeText(activity, "E-mail ou Senha Inválidos!",
+                                    Toast.LENGTH_LONG).show()
+                        }
+                    }
             }
         ) {
             Text(
@@ -119,3 +133,4 @@ fun LoginPage() {
     }
 
 }
+
