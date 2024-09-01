@@ -11,7 +11,7 @@ import com.example.medquei.ui.theme.UserPage
 
 @Composable
 fun MainNavHost(navController: NavHostController) {
-    NavHost(navController, BottomNavItem.UserPage.route) {
+    NavHost(navController, BottomNavItem.HomePage.route) {
 
         composable(route = BottomNavItem.HomePage.route) {
             HomePage()

@@ -25,6 +25,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.medquei.MedicationActivity
+import com.example.medquei.MedicationsActivity
 import java.util.*
 
 @Preview(showBackground = true)
@@ -115,7 +116,7 @@ fun RegisterMedicationPage() {
 
         ElevatedButton(
             onClick = {
-                val intent = Intent(context, MedicationActivity::class.java)
+                val intent = Intent(context, MedicationsActivity::class.java)
                 context.startActivity(intent)
             },
             modifier = Modifier

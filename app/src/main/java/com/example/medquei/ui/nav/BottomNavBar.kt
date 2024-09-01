@@ -15,9 +15,9 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 fun BottomNavBar(navController: NavHostController) {
 
     val items = listOf(
-        BottomNavItem.UserPage,
         BottomNavItem.HomePage,
         BottomNavItem.CalendarPage,
+        BottomNavItem.UserPage,
     )
     NavigationBar(
         containerColor = Color(0xFFE9F6FE)

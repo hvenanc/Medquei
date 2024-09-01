@@ -13,6 +13,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.medquei.ui.theme.AddAppBar
 import com.example.medquei.ui.theme.LoginPage
 import com.example.medquei.ui.theme.MedicationListPage
 import com.example.medquei.ui.theme.MedqueiAPPTheme
@@ -23,12 +24,16 @@ class MedicationsActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             MedqueiAPPTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background,
-                ) {
-                    MedicationListPage()
-                }
+               Scaffold(
+                   topBar = { AddAppBar("Meus Medicamentos", HomeActivity::class.java)},
+                   content = {padding ->
+                       Surface(
+                           modifier = Modifier.padding(padding),
+                       ) {
+                            MedicationListPage()
+                       }
+                   }
+               )
             }
         }
     }
