@@ -20,16 +20,19 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.medquei.MainViewModel
+import com.example.medquei.db.fb.FBDatabase
 import com.example.medquei.model.Medication
 
 
 @Composable
 fun MedicationListPage(
     viewModel: MainViewModel,
-    context: Context
+    context: Context,
+    fbDB : FBDatabase
 ) {
     val medicationList = viewModel.medications
     LazyColumn(
@@ -43,7 +46,7 @@ fun MedicationListPage(
                           Toast.makeText(context, medication.name, Toast.LENGTH_LONG).show()
                 },
                 onClose = {
-                    viewModel.onMedicationRemoved(medication)
+                    fbDB.remove(medication)
                     Toast.makeText(context, medication.name + " removido", Toast.LENGTH_LONG).show()
                 }
             )
@@ -72,7 +75,7 @@ fun MedicationItem(
         Column(modifier = Modifier.weight(1f)) {
             Text(
                 modifier = Modifier,
-                text = medication.name.toString(),
+                text = medication.name,
                 fontSize = 24.sp
             )
             Text(

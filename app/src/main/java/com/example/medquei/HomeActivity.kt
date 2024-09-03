@@ -50,7 +50,6 @@ class HomeActivity : ComponentActivity() {
         setContent {
             val navController = rememberNavController()
             val context = LocalContext.current
-            val currentRoute = navController.currentBackStackEntryAsState()
             val fbDB = remember { FBDatabase(viewModel) }
             MedqueiAPPTheme {
                 Scaffold(

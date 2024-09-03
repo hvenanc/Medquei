@@ -8,8 +8,10 @@ import androidx.activity.viewModels
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import com.example.medquei.db.fb.FBDatabase
 import com.example.medquei.ui.theme.MedicationListPage
 import com.example.medquei.ui.theme.MedqueiAPPTheme
 import com.example.medquei.ui.topbar.AddAppBar
@@ -17,10 +19,11 @@ import com.example.medquei.ui.topbar.AddAppBar
 class MedicationsActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val viewModel: MainViewModel by viewModels()
         enableEdgeToEdge()
         setContent {
             val context = LocalContext.current
-            val viewModel: MainViewModel by viewModels()
+            val fbDB = remember { FBDatabase(viewModel) }
             MedqueiAPPTheme {
                Scaffold(
                    topBar = { AddAppBar("Meus Medicamentos", HomeActivity::class.java)},
@@ -28,7 +31,7 @@ class MedicationsActivity : ComponentActivity() {
                        Surface(
                            modifier = Modifier.padding(padding),
                        ) {
-                            MedicationListPage(viewModel = viewModel, context = context)
+                            MedicationListPage(viewModel, context, fbDB)
                        }
                    }
                )
