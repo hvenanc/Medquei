@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import com.example.medquei.ui.theme.MedqueiAPPTheme
 import com.example.medquei.ui.theme.RegisterPage
 
-class RegisterActivity : ComponentActivity() {
+class RegisterUserActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()

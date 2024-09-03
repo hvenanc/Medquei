@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.Text
@@ -29,7 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.medquei.LoginActivity
 import com.example.medquei.R
-import com.example.medquei.RegisterActivity
+import com.example.medquei.RegisterUserActivity
 
 @Preview(showBackground = true)
 @Composable
@@ -90,7 +89,7 @@ fun InitialPage(modifier: Modifier = Modifier) {
             shape = RoundedCornerShape(10.dp),
             onClick = {
                 activity?.startActivity(
-                    Intent(activity, RegisterActivity::class.java).setFlags(
+                    Intent(activity, RegisterUserActivity::class.java).setFlags(
                         Intent.FLAG_ACTIVITY_SINGLE_TOP
                     )
                 )

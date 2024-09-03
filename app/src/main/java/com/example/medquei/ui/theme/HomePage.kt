@@ -1,6 +1,7 @@
 package com.example.medquei.ui.theme
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP
 import androidx.compose.foundation.background
@@ -34,12 +35,17 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.medquei.MainViewModel
 import com.example.medquei.MedicationsActivity
 import com.example.medquei.R
+import com.example.medquei.db.fb.FBDatabase
 
-@Preview(showBackground = true)
 @Composable
-fun HomePage() {
+fun HomePage(
+    viewModel: MainViewModel,
+    context: Context,
+    fbDB : FBDatabase
+) {
     val activity = LocalContext.current as? Activity
 
     Column(

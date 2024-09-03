@@ -32,7 +32,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.medquei.HomeActivity
 import com.example.medquei.R
-import com.example.medquei.RegisterActivity
+import com.example.medquei.RegisterUserActivity
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 
@@ -118,7 +118,7 @@ fun LoginPage() {
             shape = RoundedCornerShape(10.dp),
             onClick = {
                 activity?.startActivity(
-                    Intent(activity, RegisterActivity::class.java).setFlags(
+                    Intent(activity, RegisterUserActivity::class.java).setFlags(
                         Intent.FLAG_ACTIVITY_SINGLE_TOP
                     )
                 )

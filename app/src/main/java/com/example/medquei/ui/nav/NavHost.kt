@@ -1,26 +1,34 @@
 package com.example.medquei.ui.nav
 
+import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.medquei.MainViewModel
+import com.example.medquei.db.fb.FBDatabase
 import com.example.medquei.ui.theme.HomePage
 import com.example.medquei.ui.theme.CalendarPage
 import com.example.medquei.ui.theme.UserPage
 
 @Composable
-fun MainNavHost(navController: NavHostController) {
+fun MainNavHost(
+    navController: NavHostController,
+    viewModel: MainViewModel,
+    context: Context,
+    fbDB : FBDatabase
+) {
     NavHost(navController, BottomNavItem.HomePage.route) {
 
         composable(route = BottomNavItem.HomePage.route) {
-            HomePage()
+            HomePage(context = context, viewModel = viewModel, fbDB = fbDB)
         }
         composable(route = BottomNavItem.UserPage.route) {
-            UserPage()
+            UserPage(context = context, viewModel = viewModel, fbDB = fbDB)
         }
         composable(route = BottomNavItem.CalendarPage.route) {
-            CalendarPage()
+            CalendarPage(context = context, viewModel = viewModel, fbDB = fbDB)
         }
     }
 }

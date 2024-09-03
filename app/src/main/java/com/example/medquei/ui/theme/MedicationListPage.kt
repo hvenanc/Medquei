@@ -1,73 +1,88 @@
 package com.example.medquei.ui.theme
 
-import android.app.Activity
-import android.content.Intent
+import android.content.Context
+import android.widget.Toast
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Warning
+import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.medquei.HomeActivity
-import com.example.medquei.RegisterActivity
+import com.example.medquei.MainViewModel
+import com.example.medquei.model.Medication
 
 
-@Preview(showBackground = true)
 @Composable
-fun MedicationListPage() {
-    // Dados de exemplo, substitua pelos seus dados reais
-    val sampleMedications = listOf("Paracetamol", "Ibuprofeno", "Amoxicilina")
-
-    LazyColumn(modifier = Modifier.padding(16.dp)) {
-        items(sampleMedications.size) { index ->
-            Text(
-                text = sampleMedications[index],
-                fontSize = 18.sp,
-                modifier = Modifier.padding(vertical = 8.dp)
+fun MedicationListPage(
+    viewModel: MainViewModel,
+    context: Context
+) {
+    val medicationList = viewModel.medications
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(8.dp)
+    ) {
+        items(medicationList) {medication ->
+            MedicationItem(medication = medication,
+                onClick = {
+                          Toast.makeText(context, medication.name, Toast.LENGTH_LONG).show()
+                },
+                onClose = {
+                    viewModel.onMedicationRemoved(medication)
+                    Toast.makeText(context, medication.name + " removido", Toast.LENGTH_LONG).show()
+                }
             )
         }
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AddAppBar(title: String, activityClass: Class<out Activity>) {
-    val activity = LocalContext.current as? Activity
-    TopAppBar(
-        title = {
-            Row(
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(text = title, color = Color(0xFFE9F6FE))
-            }
-        },
-        navigationIcon = {
-            IconButton(onClick = {
-                activity?.startActivity(
-                    Intent(activity, activityClass).setFlags(
-                        Intent.FLAG_ACTIVITY_SINGLE_TOP
-                    )
-                )
-            }) {
-                androidx.compose.material3.Icon(
-                    imageVector = Icons.Filled.ArrowBack,
-                    contentDescription = "",
-                    tint = Color(0xFFE9F6FE),
-                )
-            }
-        },
-        colors = TopAppBarDefaults.topAppBarColors(Color(0xFF125451)),
-    )
+fun MedicationItem(
+    medication: Medication,
+    onClick : () -> Unit,
+    onClose : () -> Unit,
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(8.dp)
+            .clickable { onClick() },
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Icon(
+            imageVector = Icons.Default.Warning,
+            contentDescription = ""
+        )
+        Spacer(modifier = Modifier.size(12.dp))
+        Column(modifier = Modifier.weight(1f)) {
+            Text(
+                modifier = Modifier,
+                text = medication.name.toString(),
+                fontSize = 24.sp
+            )
+            Text(
+                modifier = Modifier,
+                text = medication.date.toString(),
+                fontSize = 16.sp
+            )
+        }
+        IconButton(onClick =  onClose ) {
+            Icon(Icons.Filled.Delete, contentDescription = "Deletar")
+        }
+    }
 }
