@@ -74,7 +74,8 @@ fun HomePage(
                     fontSize = 15.sp,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(bottom = 10.dp).padding(start = 17.dp)
+                        .padding(bottom = 10.dp)
+                        .padding(start = 17.dp)
                 )
 
                 Row(
@@ -110,9 +111,17 @@ fun HomePage(
             modifier = Modifier
                 .fillMaxSize()
                 .weight(0.7f)
-                .background(Color.DarkGray)
         ) {
-            // Conteúdo futuro
+            Row(
+                modifier = Modifier.fillMaxWidth().padding(8.dp),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Text(
+                    text = " Que Massa!\n Nenhum medicamento para Hoje!",
+                    color = Color.White,
+                    fontSize = 20.sp
+                )
+            }
         }
     }
 }
