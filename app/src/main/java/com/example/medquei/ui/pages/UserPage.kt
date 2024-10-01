@@ -1,4 +1,4 @@
-package com.example.medquei.ui.theme
+package com.example.medquei.ui.pages
 
 import android.content.Context
 import androidx.compose.foundation.background
@@ -20,7 +20,7 @@ import com.example.medquei.R
 import com.example.medquei.db.fb.FBDatabase
 
 @Composable
-fun CalendarPage(
+fun UserPage(
     viewModel: MainViewModel,
     context: Context,
     fbDB : FBDatabase
@@ -29,15 +29,16 @@ fun CalendarPage(
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .background(colorResource(id = R.color.purple_700))
+            .wrapContentSize(Alignment.Center)
     ) {
         Text(
-            text = "Meus Próximos Medicamentos",
+            text = "Perfil do Usuário",
             fontWeight = FontWeight.Bold,
-            color = Color(0xFF125451),
+            color = Color.White,
+            modifier = Modifier.align(Alignment.CenterHorizontally),
             textAlign = TextAlign.Center,
             fontSize = 20.sp
         )
-
-        MedicationListPage(viewModel = viewModel, context = context, fbDB = fbDB)
     }
 }

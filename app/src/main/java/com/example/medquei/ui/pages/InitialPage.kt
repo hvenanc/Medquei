@@ -1,4 +1,4 @@
-package com.example.medquei.ui.theme
+package com.example.medquei.ui.pages
 
 import android.app.Activity
 import android.content.Intent

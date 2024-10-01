@@ -1,4 +1,4 @@
-package com.example.medquei.ui.theme
+package com.example.medquei.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.size

@@ -8,7 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import com.example.medquei.ui.theme.InitialPage
+import com.example.medquei.ui.pages.InitialPage
 import com.example.medquei.ui.theme.MedqueiAPPTheme
 
 class MainActivity : ComponentActivity() {

@@ -12,7 +12,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import com.example.medquei.db.fb.FBDatabase
-import com.example.medquei.ui.theme.MedicationListPage
+import com.example.medquei.ui.pages.MedicationListPage
 import com.example.medquei.ui.theme.MedqueiAPPTheme
 import com.example.medquei.ui.topbar.AddAppBar
 

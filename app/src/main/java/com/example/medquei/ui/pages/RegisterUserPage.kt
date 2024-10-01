@@ -1,7 +1,6 @@
-package com.example.medquei.ui.theme
+package com.example.medquei.ui.pages
 
 import android.app.Activity
-import android.content.Intent
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -18,6 +17,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -30,19 +30,23 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.medquei.HomeActivity
 import com.example.medquei.R
-import com.example.medquei.RegisterUserActivity
+import com.example.medquei.db.fb.FBDatabase
+import com.example.medquei.model.User
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 
 @Preview(showBackground = true)
 @Composable
-fun LoginPage() {
+fun RegisterPage() {
 
+    var name by rememberSaveable { mutableStateOf("") }
     var email by rememberSaveable { mutableStateOf("") }
     var password by rememberSaveable { mutableStateOf("") }
+    var confirmPassword by rememberSaveable { mutableStateOf("") }
     val activity = LocalContext.current as? Activity
+    val fbDB = remember { FBDatabase() }
+
 
     Column(
         modifier = Modifier.padding(16.dp),
@@ -60,77 +64,63 @@ fun LoginPage() {
         )
         Spacer(modifier = Modifier.padding(24.dp))
         OutlinedTextField(
+            value = name,
+            label = {Text(text = "Digite seu Nome")},
+            modifier = Modifier.fillMaxWidth(),
+            onValueChange = {name = it}
+        )
+        Spacer(modifier = Modifier.padding(12.dp))
+        OutlinedTextField(
             value = email,
             label = { Text(text = "Digite seu E-mail") },
             modifier = Modifier.fillMaxWidth(),
-            onValueChange = { email = it }
+            onValueChange = {email = it},
         )
         Spacer(modifier = Modifier.padding(12.dp))
         OutlinedTextField(
             value = password,
-            label = { Text(text = "Digite a Senha") },
+            label = { Text(text = "Digite sua Senha")},
             modifier = Modifier.fillMaxWidth(),
-            onValueChange = { password = it },
-            visualTransformation = PasswordVisualTransformation()
+            onValueChange = {password = it},
+            visualTransformation = PasswordVisualTransformation(),
+        )
+        Spacer(modifier = Modifier.padding(12.dp))
+        OutlinedTextField(
+            value = confirmPassword,
+            label = { Text(text = "Repita a sua Senha")},
+            modifier = Modifier.fillMaxWidth(),
+            onValueChange = {confirmPassword = it},
+            visualTransformation = PasswordVisualTransformation(),
         )
         Spacer(modifier = Modifier.padding(12.dp))
         ElevatedButton(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(50.dp),
+            modifier = Modifier.fillMaxWidth().height(50.dp),
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color(0xFF125451),
             ),
             shape = RoundedCornerShape(10.dp),
             onClick = {
-                Firebase.auth.signInWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(activity!!) {task ->
-                        if(task.isSuccessful) {
-                            activity.startActivity(
-                                Intent(activity, HomeActivity::class.java).setFlags(
-                                    Intent.FLAG_ACTIVITY_SINGLE_TOP
-                                )
-                            )
-                        }
-                        else {
-                                Toast.makeText(activity, "E-mail ou Senha Inválidos!",
-                                    Toast.LENGTH_LONG).show()
-                        }
-                    }
-            }
+                      Firebase.auth.createUserWithEmailAndPassword(email, password)
+                          .addOnCompleteListener(activity!!) {task ->
+                              if(task.isSuccessful) {
+                                  fbDB.register(User(name, email))
+                                  Toast.makeText(activity,
+                                      "Conta Criada!", Toast.LENGTH_LONG).show()
+                                  activity.finish()
+                              }
+                              else {
+                                  Toast.makeText(activity,
+                                      "Falha ao Criar Conta!", Toast.LENGTH_LONG).show()
+                              }
+                          }
+            },
+            enabled = confirmPassword == password,
         ) {
             Text(
-                text = "Entrar",
+                text = "Cadastrar",
                 color = Color(0xFFE9F6FE),
                 fontSize = 16.sp,
             )
         }
-        Spacer(modifier = Modifier.padding(12.dp))
-        Text(text = "Não tem uma conta?")
-        Spacer(modifier = Modifier.padding(12.dp))
-        ElevatedButton(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(50.dp),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = Color(0xFFE9F6FE),
-            ),
-            shape = RoundedCornerShape(10.dp),
-            onClick = {
-                activity?.startActivity(
-                    Intent(activity, RegisterUserActivity::class.java).setFlags(
-                        Intent.FLAG_ACTIVITY_SINGLE_TOP
-                    )
-                )
-            }
-        ) {
-            Text(
-                text = "Crie sua Conta",
-                color = Color(0xFF125451),
-                fontSize = 16.sp
-            )
-        }
     }
-
 }
-
